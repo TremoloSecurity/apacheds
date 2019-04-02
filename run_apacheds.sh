@@ -37,7 +37,7 @@
 set -m
 
 CLASSPATH=$(JARS=("$ADS_HOME"/lib/*.jar); IFS=:; echo "${JARS[*]}")
-.l-=
+
 ADS_INSTANCE="$ADS_INSTANCES/$ADS_INSTANCE_NAME"
 
 ADS_OUT="$ADS_INSTANCE/log/apacheds.out"
@@ -64,7 +64,7 @@ ads-certificatePassword: $APACHEDS_TLS_KS_PWD
 EOF
 
 echo "Deleting example partition"
-ldapdelete -r  -h 127.0.0.1 -p 10389 -D uid=admin,ou=system -w secret ads-partitionId=$RDN_VAL,ou=partitions,ads-directoryServiceId=default,ou=config
+ldapdelete -r  -h 127.0.0.1 -p 10389 -D uid=admin,ou=system -w secret ads-partitionId=example,ou=partitions,ads-directoryServiceId=default,ou=config
 
 
 export DN_COMP=`echo $DN | sed 's/,.*//'`
@@ -229,6 +229,28 @@ EOF
 
 
 
+kill $!
+
+
+timeout 30 sh -c "while  nc -z localhost 10389; do sleep 1; done"
+
+
+eval "java $JAVA_OPTS $ADS_CONTROLS $ADS_EXTENDED_OPERATIONS $ADS_INTERMEDIATE_RESPONSES -Dlog4j.configuration=file:/usr/local/apacheds/conf/log4j.properties -Dapacheds.log.dir=$ADS_INSTANCE/log -classpath $CLASSPATH org.apache.directory.server.UberjarMain $ADS_INSTANCE 2>&1 &"
+
+timeout 30 sh -c "while ! nc -z localhost 10389; do sleep 1; done"
+
+echo "ApacheDS Restarted"
+
+if [[ -z "${LDIF_FILE}" ]]; then
+    echo "No initial LDIF file provided"
+else
+    ldapmodify -h 127.0.0.1 -p 10389 -D uid=admin,ou=system -w secret -f $LDIF_FILE -a
+fi
+
+
+
+
+
 echo "Setting admin password"
 
 ldapmodify -h 127.0.0.1 -p 10389 -D uid=admin,ou=system -w secret <<EOF
@@ -238,20 +260,6 @@ replace: userPassword
 userPassword: $APACHEDS_ROOT_PASSWORD
 -
 EOF
-
-
-
-
-
-kill $!
-
-eval "java $JAVA_OPTS $ADS_CONTROLS $ADS_EXTENDED_OPERATIONS $ADS_INTERMEDIATE_RESPONSES -Dlog4j.configuration=file:/usr/local/apacheds/conf/log4j.properties -Dapacheds.log.dir=$ADS_INSTANCE/log -classpath $CLASSPATH org.apache.directory.server.UberjarMain $ADS_INSTANCE 2>&1 &"
-
-timeout 30 sh -c "while ! nc -z localhost 10389; do sleep 1; done"
-
-echo "ApacheDS Restarted"
-
-
 
 
 jnum=$(jobs -l | grep " $! " | sed 's/\[\(.*\)\].*/\1/')
