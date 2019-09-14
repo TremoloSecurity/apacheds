@@ -66,6 +66,23 @@ EOF
 echo "Deleting example partition"
 ldapdelete -r  -h 127.0.0.1 -p 10389 -D uid=admin,ou=system -w secret ads-partitionId=example,ou=partitions,ads-directoryServiceId=default,ou=config
 
+ldapmodify -h 127.0.0.1 -p 10389 -D uid=admin,ou=system -w secret <<EOF
+version: 1
+
+dn: cn=schema
+changeType: modify
+add: attributeTypes
+attributeTypes: ( 1.2.3.4.5.6.7.8.9.0 NAME 'samAccountName' EQUALITY caseIgnoreMatch SUBSTR caseIgnoreSubstringsMatch SYNTAX 1.3.6.1.4.1.1466.115.121.1.15 SINGLE-VALUE USAGE userApplications X-SCHEMA 'core' )
+-
+
+dn: cn=schema
+changeType: modify
+add: objectClasses
+objectClasses: ( 2.2.3.4.5.6.7.8.9.0 NAME 'user' DESC 'active directory user' SUP top STRUCTURAL MUST ( sn $ cn ) MAY ( userPassword $ mail $ samAccountName $ givenName $ telephoneNumber ) X-SCHEMA 'core' )
+-
+
+EOF
+
 
 export DN_COMP=`echo $DN | sed 's/,.*//'`
 export RDN=${DN_COMP/=/: }
