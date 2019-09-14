@@ -261,7 +261,7 @@ echo "ApacheDS Restarted"
 if [[ -z "${LDIF_FILE}" ]]; then
     echo "No initial LDIF file provided"
 else
-    ldapmodify -h 127.0.0.1 -p 10389 -D uid=admin,ou=system -w secret -f $LDIF_FILE -a
+    ldapmodify -h 127.0.0.1 -p 10389 -D uid=admin,ou=system -w secret -f $LDIF_FILE -a -c
 fi
 
 
