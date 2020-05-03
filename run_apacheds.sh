@@ -84,6 +84,11 @@ dn: cn=schema
 changeType: modify
 add: objectClasses
 objectClasses: ( 2.2.3.4.5.6.7.8.9.1 NAME 'group' DESC 'active directory group' SUP top STRUCTURAL MUST (  cn ) MAY ( samAccountName $ description $ member ) X-SCHEMA 'core' )
+
+dn: cn=schema
+changeType: modify
+add: objectClasses
+objectClasses: ( 2.2.3.4.5.6.7.8.9.2 NAME 'container' DESC 'active directory container' SUP top STRUCTURAL MUST (  cn ) MAY ( description ) X-SCHEMA 'core' )
 -
 
 EOF
