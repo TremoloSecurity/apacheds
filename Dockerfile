@@ -3,7 +3,7 @@ FROM ubuntu:18.04
 MAINTAINER Tremolo Security, Inc. - Docker <docker@tremolosecurity.com>
 
 ENV JDK_VERSION=1.8.0 \
-    APACHEDS_VERSION=2.0.0.AM25 \
+    APACHEDS_VERSION=2.0.0.AM26 \
     ADS_HOME=/usr/local/apacheds \
     ADS_INSTANCES=/var/apacheds \
     ADS_INSTANCE_NAME=default
