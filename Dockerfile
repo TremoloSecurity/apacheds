@@ -16,7 +16,7 @@ RUN apt-get update;apt-get -y install openjdk-8-jdk-headless curl apt-transport-
     groupadd -r apacheds -g 433 && \
     mkdir /usr/local/apacheds && \
     useradd -u 431 -r -g apacheds -d /usr/local/apacheds -s /sbin/nologin -c "ApacheDS image user" apacheds && \
-    curl http://www.apache.org/dist/directory/apacheds/dist/$APACHEDS_VERSION/apacheds-$APACHEDS_VERSION.tar.gz -o /usr/local/apacheds/apacheds.tar.gz && \
+    curl https://downloads.apache.org/directory/apacheds/dist/$APACHEDS_VERSION/apacheds-$APACHEDS_VERSION.tar.gz -o /usr/local/apacheds/apacheds.tar.gz && \
     cd /usr/local/apacheds && \
     tar -xvzf apacheds.tar.gz && \
     mv apacheds-${APACHEDS_VERSION}/* . && \
