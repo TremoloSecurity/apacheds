@@ -77,8 +77,14 @@ attributeTypes: ( 1.2.3.4.5.6.7.8.9.0 NAME 'samAccountName' EQUALITY caseIgnoreM
 
 dn: cn=schema
 changeType: modify
+add: attributeTypes
+attributeTypes: ( 1.2.3.4.5.6.7.8.9.1 NAME 'memberOf' EQUALITY caseIgnoreMatch SUBSTR caseIgnoreSubstringsMatch SYNTAX 1.3.6.1.4.1.1466.115.121.1.15 SINGLE-VALUE USAGE userApplications X-SCHEMA 'core' )
+-
+
+dn: cn=schema
+changeType: modify
 add: objectClasses
-objectClasses: ( 2.2.3.4.5.6.7.8.9.0 NAME 'user' DESC 'active directory user' SUP top STRUCTURAL MUST ( sn $ cn ) MAY ( userPassword $ mail $ samAccountName $ givenName $ telephoneNumber $ ou $ title ) X-SCHEMA 'core' )
+objectClasses: ( 2.2.3.4.5.6.7.8.9.0 NAME 'user' DESC 'active directory user' SUP top STRUCTURAL MUST ( sn $ cn ) MAY ( userPassword $ mail $ samAccountName $ givenName $ telephoneNumber $ ou $ title $ memberOf ) X-SCHEMA 'core' )
 
 dn: cn=schema
 changeType: modify
