@@ -97,6 +97,15 @@ add: objectClasses
 objectClasses: ( 2.2.3.4.5.6.7.8.9.2 NAME 'container' DESC 'active directory container' SUP top STRUCTURAL MUST (  cn ) MAY ( description ) X-SCHEMA 'core' )
 -
 
+dn: cn=nis,ou=schema
+changetype: modify
+delete: m-disabled
+m-disabled: TRUE
+-
+add: m-disabled
+m-disabled: FALSE
+-
+
 EOF
 
 
