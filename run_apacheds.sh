@@ -84,7 +84,7 @@ attributeTypes: ( 1.2.3.4.5.6.7.8.9.1 NAME 'memberOf' EQUALITY caseIgnoreMatch S
 dn: cn=schema
 changeType: modify
 add: objectClasses
-objectClasses: ( 2.2.3.4.5.6.7.8.9.0 NAME 'user' DESC 'active directory user' SUP top STRUCTURAL MUST ( sn $ cn ) MAY ( userPassword $ mail $ samAccountName $ givenName $ telephoneNumber $ ou $ title $ memberOf ) X-SCHEMA 'core' )
+objectClasses: ( 2.2.3.4.5.6.7.8.9.0 NAME 'user' DESC 'active directory user' SUP top STRUCTURAL MUST ( cn ) MAY ( sn $ userPassword $ mail $ samAccountName $ givenName $ telephoneNumber $ ou $ title $ memberOf ) X-SCHEMA 'core' )
 
 dn: cn=schema
 changeType: modify
