@@ -11,6 +11,7 @@ This container is designed to have an LDAP server that can be quickly launched f
 | DN | The root suffix of the directory | dc=domain,dc=com |
 | OBJECT_CLASS | The object class of the root suffix's object | domain |
 | LDIF_FILE | The path (in the container) of the initial LDIF file, optional | /etc/apacheds/data.ldif |
+| PRE_RUN_SCRIPT | *Optional* - A script can be run after initializing the directory before loading data |
 
 ## Volumes
 

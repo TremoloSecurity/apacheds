@@ -108,6 +108,13 @@ m-disabled: FALSE
 
 EOF
 
+if [[ -v PRE_RUN_SCRIPT ]]
+then
+  echo "Running script $PRE_RUN_SCRIPT"
+  cp "$PRE_RUN_SCRIPT" /tmp/prerun.sh
+  chmod +x /tmp/prerun.sh
+  /tmp/prerun.sh
+fi
 
 export DN_COMP=`echo $DN | sed 's/,.*//'`
 export RDN=${DN_COMP/=/: }
