@@ -49,9 +49,11 @@ timeout 30 sh -c "while ! nc -z localhost 10389; do sleep 1; done"
 
 echo "ApacheDS Started"
 
-echo "Starting TLS"
+if [[ -f /etc/apacheds/apacheds.jks ]]
+then
+    echo "Starting TLS"
 
-ldapmodify -H ldap://127.0.0.1:10389 -D uid=admin,ou=system -w secret <<EOF
+    ldapmodify -H ldap://127.0.0.1:10389 -D uid=admin,ou=system -w secret <<EOF
 dn: ads-serverId=ldapServer,ou=servers,ads-directoryServiceId=default,ou=config
 changeType: modify
 replace: ads-keystoreFile
@@ -62,6 +64,9 @@ ads-certificatePassword: $APACHEDS_TLS_KS_PWD
 -
 
 EOF
+else
+    echo "/etc/apacheds/apacheds.jks does not exist, not starting TLS"
+fi
 
 echo "Deleting example partition"
 ldapdelete -r  -H ldap://127.0.0.1:10389 -D uid=admin,ou=system -w secret ads-partitionId=example,ou=partitions,ads-directoryServiceId=default,ou=config
