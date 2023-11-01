@@ -51,7 +51,7 @@ echo "ApacheDS Started"
 
 echo "Starting TLS"
 
-ldapmodify -h 127.0.0.1 -p 10389 -D uid=admin,ou=system -w secret <<EOF
+ldapmodify -H 127.0.0.1 -p 10389 -D uid=admin,ou=system -w secret <<EOF
 dn: ads-serverId=ldapServer,ou=servers,ads-directoryServiceId=default,ou=config
 changeType: modify
 replace: ads-keystoreFile
@@ -66,7 +66,7 @@ EOF
 echo "Deleting example partition"
 ldapdelete -r  -h 127.0.0.1 -p 10389 -D uid=admin,ou=system -w secret ads-partitionId=example,ou=partitions,ads-directoryServiceId=default,ou=config
 
-ldapmodify -h 127.0.0.1 -p 10389 -D uid=admin,ou=system -w secret <<EOF
+ldapmodify -H 127.0.0.1 -p 10389 -D uid=admin,ou=system -w secret <<EOF
 version: 1
 
 dn: cn=schema
@@ -127,7 +127,7 @@ $RDN
 EOF`
 
 
-ldapmodify -h 127.0.0.1 -p 10389 -D uid=admin,ou=system -w secret -a <<EOF
+ldapmodify -H 127.0.0.1 -p 10389 -D uid=admin,ou=system -w secret -a <<EOF
 dn: ads-partitionId=$RDN_VAL,ou=partitions,ads-directoryServiceId=default,ou=config
 objectclass: top
 objectClass: ads-base
@@ -293,7 +293,7 @@ echo "ApacheDS Restarted"
 if [[ -z "${LDIF_FILE}" ]]; then
     echo "No initial LDIF file provided"
 else
-    ldapmodify -h 127.0.0.1 -p 10389 -D uid=admin,ou=system -w secret -f $LDIF_FILE -a -c
+    ldapmodify -H 127.0.0.1 -p 10389 -D uid=admin,ou=system -w secret -f $LDIF_FILE -a -c
 fi
 
 
@@ -302,7 +302,7 @@ fi
 
 echo "Setting admin password"
 
-ldapmodify -h 127.0.0.1 -p 10389 -D uid=admin,ou=system -w secret <<EOF
+ldapmodify -H 127.0.0.1 -p 10389 -D uid=admin,ou=system -w secret <<EOF
 dn: uid=admin,ou=system
 changeType: modify
 replace: userPassword
