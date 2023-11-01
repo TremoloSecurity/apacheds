@@ -64,7 +64,7 @@ ads-certificatePassword: $APACHEDS_TLS_KS_PWD
 EOF
 
 echo "Deleting example partition"
-ldapdelete -r  -h 127.0.0.1:10389 -D uid=admin,ou=system -w secret ads-partitionId=example,ou=partitions,ads-directoryServiceId=default,ou=config
+ldapdelete -r  -H 127.0.0.1:10389 -D uid=admin,ou=system -w secret ads-partitionId=example,ou=partitions,ads-directoryServiceId=default,ou=config
 
 ldapmodify -H 127.0.0.1:10389 -D uid=admin,ou=system -w secret <<EOF
 version: 1
