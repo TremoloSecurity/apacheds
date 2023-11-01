@@ -9,7 +9,7 @@ ENV JDK_VERSION=1.8.0 \
     ADS_INSTANCE_NAME=default
 
 LABEL io.k8s.description="ApacheDS" \
-      io.k8s.display-name="ApacheDS" 
+      io.k8s.display-name="ApacheDS"
 
 RUN apt-get update;apt-get -y install openjdk-8-jdk-headless curl apt-transport-https gnupg netcat ldap-utils && \
     apt-get -y upgrade;apt-get clean;rm -rf /var/lib/apt/lists/*; \
@@ -23,13 +23,13 @@ RUN apt-get update;apt-get -y install openjdk-8-jdk-headless curl apt-transport-
     rm -rf apacheds-${APACHEDS_VERSION} && \
     mkdir /var/apacheds
 
-ADD run_apacheds.sh /usr/local/apacheds/bin/run_apacheds.sh 
+ADD run_apacheds.sh /usr/local/apacheds/bin/run_apacheds.sh
 ADD log4j.properties /usr/local/apacheds/conf/log4j.properties
 
 
 
 RUN chown -R apacheds:apacheds /usr/local/apacheds && \
-    chown -R apacheds:apacheds /var/apacheds 
+    chown -R apacheds:apacheds /var/apacheds
 
 
 USER 431
