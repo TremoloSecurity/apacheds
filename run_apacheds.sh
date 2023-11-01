@@ -5,10 +5,10 @@
 #
 # Environment Variable Prerequisites
 #
-#   Do not set the variables in this script. Instead put them into 
+#   Do not set the variables in this script. Instead put them into
 #   $ADS_HOME/bin/setenv.sh to keep your customizations separate.
 #
-#   ADS_HOME        (Optional) The directory that contains your apacheds 
+#   ADS_HOME        (Optional) The directory that contains your apacheds
 #                   install.  Defaults to the parent directory of the
 #                   directory containing this script.
 #
@@ -25,7 +25,7 @@
 #
 #   ADS_SHUTDOWN_PORT
 #                   (Optional) If specified, it must be a valid port number
-#                   between 1024 and 65536 on which ApacheDS will listen for 
+#                   between 1024 and 65536 on which ApacheDS will listen for
 #                   a connection to trigger a polite shutdown.  Defaults to 0
 #                   indicating a dynamic port allocation.
 #
