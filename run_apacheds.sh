@@ -121,9 +121,9 @@ then
   /tmp/prerun.sh
 fi
 
-export DN_COMP=`echo $DN | sed 's/,.*//'`
+export DN_COMP=`echo "${DN}" | sed 's/,.*//'`
 export RDN=${DN_COMP/=/: }
-export RDN_VAL=`echo $DN_COMP | sed 's/.*=//'`
+export RDN_VAL=`echo "${DN_COMP}" | sed 's/.*=//'`
 
 export CTX_ENTRY=`base64 -w 0 <<EOF
 dn: $DN
@@ -298,7 +298,7 @@ echo "ApacheDS Restarted"
 if [[ -z "${LDIF_FILE}" ]]; then
     echo "No initial LDIF file provided"
 else
-    ldapmodify -H ldap://127.0.0.1:10389 -D uid=admin,ou=system -w secret -f $LDIF_FILE -a -c
+    ldapmodify -H ldap://127.0.0.1:10389 -D uid=admin,ou=system -w secret -f "${LDIF_FILE}" -a -c
 fi
 
 
@@ -317,6 +317,6 @@ EOF
 
 
 jnum=$(jobs -l | grep " $! " | sed 's/\[\(.*\)\].*/\1/')
-echo "Backgroung job number: $jnum"
+echo "Backgroung job number: ${jnum}"
 
-fg $jnum
+fg "${jnum}"
