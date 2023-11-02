@@ -126,7 +126,8 @@ fi
 DN_COMP="$(echo "${DN}" | sed 's/,.*//')"
 export DN_COMP
 export RDN=${DN_COMP/=/: }
-export RDN_VAL="$(echo "${DN_COMP}" | sed 's/.*=//')"
+RDN_VAL="$(echo "${DN_COMP}" | sed 's/.*=//')"
+export RDN_VAL
 
 export CTX_ENTRY=`base64 -w 0 <<EOF
 dn: $DN
