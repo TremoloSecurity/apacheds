@@ -122,7 +122,8 @@ then
   /tmp/prerun.sh
 fi
 
-export DN_COMP="$(echo "${DN}" | sed 's/,.*//')"
+DN_COMP="$(echo "${DN}" | sed 's/,.*//')"
+export DN_COMP
 export RDN=${DN_COMP/=/: }
 export RDN_VAL="$(echo "${DN_COMP}" | sed 's/.*=//')"
 
