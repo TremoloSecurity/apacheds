@@ -130,12 +130,12 @@ export RDN=${DN_COMP/=/: }
 RDN_VAL="$(echo "${DN_COMP}" | sed 's/.*=//')"
 export RDN_VAL
 
-CTX_ENTRY=`base64 -w 0 <<EOF
+CTX_ENTRY=$(base64 -w 0 <<EOF
 dn: $DN
 objectClass: $OBJECT_CLASS
 $RDN
-EOF`
-
+EOF
+)
 export CTX_ENTRY
 
 ldapmodify -H ldap://127.0.0.1:10389 -D uid=admin,ou=system -w secret -a <<EOF
