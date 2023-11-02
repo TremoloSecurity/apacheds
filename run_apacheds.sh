@@ -126,6 +126,7 @@ fi
 DN_COMP="$(echo "${DN}" | sed 's/,.*//')"
 export DN_COMP
 export RDN=${DN_COMP/=/: }
+# shellcheck disable=SC2001
 RDN_VAL="$(echo "${DN_COMP}" | sed 's/.*=//')"
 export RDN_VAL
 
