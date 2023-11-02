@@ -122,6 +122,7 @@ then
   /tmp/prerun.sh
 fi
 
+# shellcheck disable=SC2001
 DN_COMP="$(echo "${DN}" | sed 's/,.*//')"
 export DN_COMP
 export RDN=${DN_COMP/=/: }
