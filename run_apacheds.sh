@@ -38,6 +38,7 @@ set -m
 
 CLASSPATH=$(JARS=("$ADS_HOME"/lib/*.jar); IFS=:; echo "${JARS[*]}")
 
+# shellcheck disable=SC2153
 ADS_INSTANCE="$ADS_INSTANCES/$ADS_INSTANCE_NAME"
 
 ADS_OUT="$ADS_INSTANCE/log/apacheds.out"
