@@ -41,9 +41,6 @@ CLASSPATH=$(JARS=("$ADS_HOME"/lib/*.jar); IFS=:; echo "${JARS[*]}")
 # shellcheck disable=SC2153
 ADS_INSTANCE="$ADS_INSTANCES/$ADS_INSTANCE_NAME"
 
-ADS_OUT="$ADS_INSTANCE/log/apacheds.out"
-ADS_PID="$ADS_INSTANCE/run/apacheds.pid"
-
 eval "java $JAVA_OPTS $ADS_CONTROLS $ADS_EXTENDED_OPERATIONS $ADS_INTERMEDIATE_RESPONSES -Dlog4j.configuration=file:/usr/local/apacheds/conf/log4j.properties -Dapacheds.log.dir=$ADS_INSTANCE/log -classpath $CLASSPATH org.apache.directory.server.UberjarMain $ADS_INSTANCE 2>&1 &"
 
 timeout 30 sh -c "while ! nc -z localhost 10389; do sleep 1; done"
